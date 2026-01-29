@@ -34,6 +34,12 @@ function App() {
         delete canvasRefs.current[id];
     };
 
+    const renameCanvas = (id, newName) => {
+        setCanvases(prev =>
+            prev.map(c => c.id === id ? { ...c, name: newName } : c)
+        );
+    };
+
     return (
         <div className="app-container">
             <h1>React Drawing App</h1>
@@ -53,6 +59,7 @@ function App() {
                 activeCanvasId={activeCanvasId}
                 setActiveCanvasId={setActiveCanvasId}
                 removeCanvas={removeCanvas}
+                renameCanvas={renameCanvas}
             />
 
             {/* Рендерим все канвасы, но скрываем неактивные */}

@@ -53,13 +53,16 @@
 }
 
 .tab {
-    min-width: 110px;
+    width: 110px;
     text-align: center;
     padding: 8px 16px;
     background: #e0e0e0;
     border: 1px solid #ccc;
     border-bottom: none;
     border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .tab.active {
@@ -67,6 +70,28 @@
     font-weight: bold;
     border-bottom: 2px solid white;
     margin-bottom: -1px;
+}
+
+.tab-input {
+    border: 1px solid #007bff;
+    outline: none;
+    padding: 0 4px;
+    font-family: inherit;
+    font-size: inherit;
+    width: 80px; /* Можно настроить под себя */
+    border-radius: 2px;
+
+}
+
+.tab-close {
+    margin-left: 10px;
+    color: #999;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tab-close:hover {
+    color: #dc3545;
 }
 
 canvas {
