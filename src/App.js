@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import CanvasBoard from './components/CanvasBoard';
 import Toolbar from './components/Toolbar';
 import Tabs from "./components/Tabs";
@@ -15,6 +15,7 @@ function App() {
       [{id: 1, name: 'Рисунок 1'}]
     );
     const [activeCanvasId, setActiveCanvasId] = useState(1);
+    const canvasRefs = useRef({});
 
     const addCanvas = () => {
         const newCanvasId = canvases.length > 0 ? Math.max(...canvases.map(c => c.id)) + 1 : 1;
