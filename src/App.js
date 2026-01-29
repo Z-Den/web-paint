@@ -17,10 +17,21 @@ function App() {
     const [activeCanvasId, setActiveCanvasId] = useState(1);
 
     const addCanvas = () => {
-        const newCanvasId = canvases.length + 1;
+        const newCanvasId = canvases.length > 0 ? Math.max(...canvases.map(c => c.id)) + 1 : 1;
         setCanvases([...canvases, {id: newCanvasId, name: 'Рисунок ' + newCanvasId}]);
         setActiveCanvasId(newCanvasId);
     }
+
+    const removeCanvas = (e, id) => {
+        e.stopPropagation(); // Чтобы не переключало вкладку при клике на крестик
+        if (canvases.length === 1) return;
+        const newList = canvases.filter(c => c.id !== id);
+        setCanvases(newList);
+        if (activeCanvasId === id) {
+            setActiveCanvasId(newList[0].id);
+        }
+        delete canvasRefs.current[id];
+    };
 
     return (
         <div className="app-container">
@@ -40,6 +51,7 @@ function App() {
                 canvases={canvases}
                 activeCanvasId={activeCanvasId}
                 setActiveCanvasId={setActiveCanvasId}
+                removeCanvas={removeCanvas}
             />
 
             {/* Рендерим все канвасы, но скрываем неактивные */}
