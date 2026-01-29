@@ -1,12 +1,13 @@
 import React from 'react';
 
 const Toolbar = ({
-                     selectedTool,
-                     setTool,
-                     selectedColor,
-                     setColor,
-                     brushSize,
-                     setBrushSize
+                    selectedTool,
+                    setTool,
+                    selectedColor,
+                    setColor,
+                    brushSize,
+                    setBrushSize,
+                    onAddCanvas,
                  }) => {
     return (
         <div className="toolbar">
@@ -49,6 +50,8 @@ const Toolbar = ({
                     onChange={(e) => setBrushSize(Number(e.target.value))}
                 />
             </div>
+
+            <button className="tool-btn" onClick={onAddCanvas}>Добавить холст</button>
         </div>
     );
 };
