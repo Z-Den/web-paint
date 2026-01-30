@@ -8,6 +8,7 @@ const Toolbar = ({
                     brushSize,
                     setBrushSize,
                     onAddCanvas,
+                    onSetPageBackground
                  }) => {
     return (
         <div className="toolbar">
@@ -52,6 +53,12 @@ const Toolbar = ({
             </div>
 
             <button className="tool-btn" onClick={onAddCanvas}>Добавить холст</button>
+            <button
+                className="tool-btn"
+                onClick={onSetPageBackground}
+            >
+                Сделать фоном
+            </button>
         </div>
     );
 };

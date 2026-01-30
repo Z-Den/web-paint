@@ -7,15 +7,20 @@ import './style/style.css';
 
 
 function App() {
-
+    // Tools
     const [selectedTool, setTool] = useState('brush'); // 'brush' или 'eraser'
     const [selectedColor, setColor] = useState('#000000');
     const [brushSize, setBrushSize] = useState(5);
+
+    // Canvases
     const [canvases, setCanvases] = useState(
       [{id: 1, name: 'Рисунок 1'}]
     );
     const [activeCanvasId, setActiveCanvasId] = useState(1);
     const canvasRefs = useRef({});
+
+    // BG Image
+    const [pageBackground, setPageBackground] = useState('');
 
     const addCanvas = () => {
         const newCanvasId = canvases.length > 0 ? Math.max(...canvases.map(c => c.id)) + 1 : 1;
@@ -24,7 +29,7 @@ function App() {
     }
 
     const removeCanvas = (e, id) => {
-        e.stopPropagation(); // Чтобы не переключало вкладку при клике на крестик
+        e.stopPropagation();
         if (canvases.length === 1) return;
         const newList = canvases.filter(c => c.id !== id);
         setCanvases(newList);
@@ -40,8 +45,22 @@ function App() {
         );
     };
 
+    const handleSetPageBackground = () => {
+        if (canvasRefs.current[activeCanvasId]) {
+            const dataUrl = canvasRefs.current[activeCanvasId].getImage();
+            setPageBackground(dataUrl);
+        }
+    };
+
     return (
-        <div className="app-container">
+        <div className="app-container"
+             style={{
+                 backgroundImage: pageBackground ? `url(${pageBackground})` : 'none',
+                 backgroundSize: 'cover', // Растянуть на весь экран
+                 backgroundPosition: 'center',
+                 backgroundRepeat: 'no-repeat',
+             }}
+        >
             <h1><i>Drawing</i> App</h1>
 
             <Toolbar
@@ -52,6 +71,7 @@ function App() {
                 brushSize={brushSize}
                 setBrushSize={setBrushSize}
                 onAddCanvas={addCanvas}
+                onSetPageBackground={handleSetPageBackground}
             />
 
             <Tabs
@@ -70,6 +90,7 @@ function App() {
                         style={{ display: activeCanvasId === canvas.id ? 'block' : 'none' }}
                     >
                         <CanvasBoard
+                            ref={(el) => (canvasRefs.current[canvas.id] = el)}
                             selectedTool={selectedTool}
                             selectedColor={selectedColor}
                             brushSize={brushSize}

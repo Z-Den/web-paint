@@ -1,8 +1,14 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 
-const CanvasBoard = ({ selectedTool, selectedColor, brushSize }) => {
+const CanvasBoard = forwardRef(({ selectedTool, selectedColor, brushSize }, ref) => {
     const canvasRef = useRef(null);
     const [isDrawing, setIsDrawing] = useState(false);
+
+    useImperativeHandle(ref, () => ({
+        getImage: () => {
+            return canvasRef.current.toDataURL();
+        }
+    }));
 
     // Инициализация канваса (размер и настройка линий)
     useEffect(() => {
@@ -10,8 +16,8 @@ const CanvasBoard = ({ selectedTool, selectedColor, brushSize }) => {
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
 
-        canvas.width = screenWidth * 0.8;
-        canvas.height = screenHeight * 0.5;
+        canvas.width = screenWidth * 0.7;
+        canvas.height = screenHeight * 0.7;
 
         // Начальный стиль линии
         const ctx = canvas.getContext('2d');
@@ -59,6 +65,6 @@ const CanvasBoard = ({ selectedTool, selectedColor, brushSize }) => {
             onMouseLeave={stopDrawing}
         />
     );
-};
+});
 
 export default CanvasBoard;
