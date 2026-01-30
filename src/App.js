@@ -52,6 +52,19 @@ function App() {
         }
     };
 
+    const handleClear = () => {
+        if (canvasRefs.current[activeCanvasId]) {
+            canvasRefs.current[activeCanvasId].clearCanvas();
+        }
+    };
+
+    const handleDownload = () => {
+        if (canvasRefs.current[activeCanvasId]) {
+            const activeName = canvases.find(c => c.id === activeCanvasId)?.name || 'drawing';
+            canvasRefs.current[activeCanvasId].downloadCanvas(activeName);
+        }
+    };
+
     return (
         <div className="app-container"
              style={{
@@ -72,6 +85,8 @@ function App() {
                 setBrushSize={setBrushSize}
                 onAddCanvas={addCanvas}
                 onSetPageBackground={handleSetPageBackground}
+                onClear={handleClear}
+                onDownload={handleDownload}
             />
 
             <Tabs

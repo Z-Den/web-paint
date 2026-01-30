@@ -5,6 +5,22 @@ const CanvasBoard = forwardRef(({ selectedTool, selectedColor, brushSize }, ref)
     const [isDrawing, setIsDrawing] = useState(false);
 
     useImperativeHandle(ref, () => ({
+
+        clearCanvas: () => {
+            const canvas = canvasRef.current;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        },
+
+        downloadCanvas: (fileName) => {
+            const canvas = canvasRef.current;
+            const link = document.createElement('a');
+            link.download = `${fileName}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        },
+
         getImage: () => {
             return canvasRef.current.toDataURL();
         }
