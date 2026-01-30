@@ -22,7 +22,7 @@ const Tabs = ({canvases, activeCanvasId, setActiveCanvasId, removeCanvas, rename
         if (e.key === 'Enter') {
             handleBlur();
         } else if (e.key === 'Escape') {
-            setEditingId(null); // Отмена редактирования
+            setEditingId(null);
         }
     };
 
@@ -46,11 +46,11 @@ const Tabs = ({canvases, activeCanvasId, setActiveCanvasId, removeCanvas, rename
                             onKeyDown={handleKeyDown}
                         />
                     ) : (
-                        <span>{canvas.name}</span>
+                        <span className="tab-name">{canvas.name}</span>
                     )}
                     {canvases.length > 1 && (
                         <span
-                            style={{marginLeft: '10px', color: '#999', fontWeight: 'bold'}}
+                            className="tab-close"
                             onClick={(e) => removeCanvas(e, canvas.id)}
                         >
                             ×

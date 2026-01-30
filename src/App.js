@@ -42,7 +42,7 @@ function App() {
 
     return (
         <div className="app-container">
-            <h1>React Drawing App</h1>
+            <h1><i>Drawing</i> App</h1>
 
             <Toolbar
                 selectedTool={selectedTool}

@@ -53,16 +53,16 @@
 }
 
 .tab {
-    width: 110px;
-    text-align: center;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 8px 16px;
     background: #e0e0e0;
     border: 1px solid #ccc;
     border-bottom: none;
     border-radius: 8px 8px 0 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    box-sizing: border-box;
 }
 
 .tab.active {
@@ -72,13 +72,21 @@
     margin-bottom: -1px;
 }
 
+.tab-name {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
 .tab-input {
     border: 1px solid #007bff;
     outline: none;
     padding: 0 4px;
     font-family: inherit;
     font-size: inherit;
-    width: 80px; /* Можно настроить под себя */
+    width: 80px;
     border-radius: 2px;
 
 }
